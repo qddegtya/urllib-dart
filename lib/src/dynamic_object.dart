@@ -10,12 +10,13 @@ class DynamicObject {
       if (_data.containsKey(name)) {
         var value = _data[name];
         if (value is Function) {
+          // 必然是 getter
           return Function.apply(value, [], {});
         }
         return value;
       }
       var newObj = DynamicObject();
-      newObj._data[name] = newObj;
+      _data[name] = newObj;
       return newObj;
     }
 
